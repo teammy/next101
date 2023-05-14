@@ -15,16 +15,23 @@
     "antd": "^5.3.2",
     "bcrypt": "^5.1.0",
     "bootstrap": "^5.3.0-alpha2",
+<<<<<<< HEAD
     "framer-motion": "^10.12.10",
+=======
+    "datatables.net-dt": "^1.13.4",
+    "jquery": "^3.6.4",
+>>>>>>> 02872fb7b00d96eb9f32c26c63e26ab90fc91baf
     "knex": "^2.4.2",
     "mysql2": "^3.2.0",
     "next": "13.2.4",
     "next-auth": "^4.20.1",
     "react": "18.2.0",
+    "react-data-table-component": "^7.5.3",
     "react-dom": "18.2.0",
     "thaidatepicker-react": "^1.0.2"
   },
   "devDependencies": {
+    "@types/react": "18.2.0",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4"
   }
