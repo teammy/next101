@@ -53,19 +53,19 @@ const AddDataForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="equip_type">ชื่ออุปกรณ์</label>
-      <input
-        type="text"
-        name="equip_type"
-        id="equip_type"
-        value={data.equip_type}
-        onChange={handleChange}
-      />
-      <label htmlFor="equip_depart">แผนก</label>
+      <label htmlFor="equip_depart">หน่วยงาน</label>
       <input
         type="text"
         name="equip_depart"
         id="equip_depart"
+        value={data.equip_type}
+        onChange={handleChange}
+      />
+      <label htmlFor="equip_type">ชนิด</label>
+      <input
+        type="text"
+        name="equip_type"
+        id="equip_type"
         value={data.equip_depart}
         onChange={handleChange}
       />
