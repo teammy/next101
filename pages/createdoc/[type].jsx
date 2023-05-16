@@ -15,4 +15,4 @@ function CreateDoc() {
   )
 }
 
-export default CreateDoc
+export default CreateDoc;

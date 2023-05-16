@@ -13,7 +13,7 @@ const CreateUser = async (req,res) => {
 
 const ListUser = async (req,res) => {
   try {
-    const listAllUser = await ksh_conn.select('*').from('personal');
+    const listAllUser = await ksh_conn.select('*').from('personal').limit(5);
     res.status(200).json(listAllUser);
   } catch (err) {
     console.log(err)

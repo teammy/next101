@@ -1,4 +1,4 @@
-import { Input } from '@chakra-ui/react'
+import { Button, Input,Select } from '@chakra-ui/react'
 import { useState,useEffect } from 'react'
 
 const AddBuildingForm = () => {
@@ -39,7 +39,11 @@ const AddBuildingForm = () => {
       if (response.ok) {
         const newItem = await response.json();
         setListData((prevData) => [...prevData, newItem]); // Add the new item to the list
-        setData({ equip_building_name: "" }); // Clear the input field
+        setData((prevData) => ({
+          ...prevData,
+          equip_building_name: "",
+        })); 
+        fetchData();
       }
     } catch (error) {
       console.error('Failed to submit data:', error);
@@ -84,23 +88,23 @@ const AddBuildingForm = () => {
     <>
     <form onSubmit={handleSubmit}>
       <label htmlFor="equip_building_name">อาคาร</label>
-      <input
+      <Input
         type="text"
         name="equip_building_name"
         id="equip_building_name"
-        value={data.equip_type}
+        value={data.equip_building_name}
         onChange={handleChange}
       />
-      <button type="submit">เพิ่มข้อมูล</button>
+      
+      <Button colorScheme='messenger' type="submit">เพิ่มข้อมูล</Button>
+
     </form>
     <div>
-      <h1>Data List</h1>
       <ul>
         {listdata.map((item) => (
           <li key={item.equip_building_id}>
-            <span>{item.equip_building_id}</span>
             <span>{item.equip_building_name}</span>
-            <button onClick={() => handleDelete(item.equip_building_id)}>Delete</button>
+            <Button colorScheme='red'  onClick={() => handleDelete(item.equip_building_id)}>Delete</Button>
           </li>
         ))}
       </ul>

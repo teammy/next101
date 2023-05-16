@@ -1,14 +1,17 @@
 import AddDeviceForm from "../../components/AddDeviceForm";
 import ListDevice from "../../components/ListDevice";
+import Sidebar from "components/Sidebar";
+import MainContent from "components/MainContent";
 
 function DeviceList() {
   return (
     <>
-    <AddDeviceForm />
-    <div>
-      Device List Page
-    </div>
-    <ListDevice />
+      <Sidebar>
+        <MainContent>
+          <AddDeviceForm />
+          <ListDevice />
+        </MainContent>
+      </Sidebar>
     </>
   );
 }

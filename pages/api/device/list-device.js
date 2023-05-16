@@ -1,4 +1,4 @@
-import { safety_conn } from "../../lib/db";  
+import { safety_conn } from "../../../lib/db";  
 
 export default async function handler(req, res) {
 
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 
   if(req.method==='GET') {
     try {
-      const result = await safety_conn('equip_item').select('*').orderBy('equip_id','desc');
+      const result = await safety_conn('equip_item').select('equip_department','equip_location_install','equip_type').orderBy('equip_id','desc');
       res.status(200).json(result);
     } catch (error) {
       res.status(500).json({message: error.message});
