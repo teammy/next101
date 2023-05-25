@@ -24,37 +24,32 @@ const ListDevice = () => {
   const columns = [
     {
       name: 'อาคาร',
-      selector: 'equip_department',
+      selector: 'equip_building_name',
       sortable: true,
     },
     {
       name: 'ชั้น',
-      selector: 'equip_department',
+      selector: 'equip_floor_value',
       sortable: true,
     },
     {
       name: 'หน่วยงาน',
-      selector: 'equip_id',
+      selector: 'equip_department_name',
       sortable: true,
     },
     {
       name: 'บริเวณติดตั้ง',
-      selector: 'equip_type',
+      selector: 'equip_location_install',
       sortable: true,
     },
     {
       name: 'วันบรรจุก๊าซ',
-      selector: 'equip_type',
+      selector: 'equip_date_start',
       sortable: true,
     },
     {
       name: 'วันหมดอายุ',
-      selector: 'equip_type',
-      sortable: true,
-    },
-    {
-      name: 'Email',
-      selector: 'equip_type',
+      selector: 'equip_date_expire',
       sortable: true,
     },
   ];

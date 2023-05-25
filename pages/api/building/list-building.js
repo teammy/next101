@@ -1,4 +1,4 @@
-import { safety_conn } from "../../../lib/db";  
+import { safety_conn,closeSafetyConnection } from "../../../lib/db";  
 
 export default async function handler(req, res) {
 
@@ -9,8 +9,11 @@ export default async function handler(req, res) {
     } catch (error) {
       res.status(500).json({message: error.message});
       console.log(error);
-    }
+    } 
   }
-
-
 }
+
+process.on('SIGINT', () => {
+  closeSafetyConnection();
+  process.exit(0);
+});

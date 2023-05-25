@@ -96,14 +96,14 @@ const AddDataForm = () => {
 
     const formData = {
       equip_type: e.target.elements.equip_type.value,
-      equip_depart: data.equip_depart,
-      equip_floor: data.equip_floor,
+      equip_department: e.target.elements.equip_department.value,
+      equip_floor: e.target.elements.equip_floor.value,
       equip_location: data.equip_location,
       equip_date_start: startDate,
       equip_date_expire: expireDate,
       equip_building: e.target.elements.equip_building.value,
     };
-
+   
     fetch("/api/device/add-device", {
       method: "POST",
       headers: {
@@ -143,7 +143,7 @@ const AddDataForm = () => {
             </FormControl>
             <FormControl flex="1" mr={4}>
               <FormLabel>หน่วยงาน</FormLabel>
-              <Select placeholder="-- เลือกชนิด --" name="equip_depart">
+              <Select placeholder="-- เลือกชนิด --" name="equip_department">
                 {departmentList.map((item) => (
                   <option
                     key={item.equip_department_id}
