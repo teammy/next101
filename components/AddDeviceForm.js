@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import {
   Select,
   FormControl,
@@ -9,13 +9,14 @@ import {
   Flex,
   Box,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import { ThaiDatePicker } from "thaidatepicker-react";
 import dayjs from "dayjs";
 import "dayjs/locale/th";
 dayjs.locale("th");
 
-const AddDataForm = () => {
+const AddDataForm = (props) => {
   const [startDate, setStartDate] = useState("");
   const [expireDate, setExpireDate] = useState("");
   const [buildingList, setBuildingList] = useState([]);
@@ -91,6 +92,8 @@ const AddDataForm = () => {
     setExpireDate(christDate);
   };
 
+  const toast = useToast();
+  const formRef = useRef();
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -103,20 +106,52 @@ const AddDataForm = () => {
       equip_date_expire: expireDate,
       equip_building: e.target.elements.equip_building.value,
     };
-   
+
     fetch("/api/device/add-device", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
-    });
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          toast({
+            title: "บันทึกข้อมูลสำเร็จ",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+          });
+
+          // Clear the form fields
+          setStartDate("");
+          setExpireDate("");
+          setData({
+            equip_type: "",
+            equip_depart: "",
+            equip_location: "",
+          });
+          // Reset the form fields
+          formRef.current.reset();
+          props.fetchData();
+        } else {
+          toast({
+            title: "บันทึกข้อมูลไม่สำเร็จ",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+          });
+        }
+      });
   };
 
   return (
     <>
       <Box margin="auto">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} ref={formRef}>
           <Flex direction="row">
             <FormControl flex="1" mr={4}>
               <FormLabel>อาคาร</FormLabel>
@@ -201,8 +236,8 @@ const AddDataForm = () => {
             </FormControl>
           </Flex>
 
-          <Button mt={4} colorScheme="teal" type="submit">
-            Submit
+          <Button mt={4} colorScheme="messenger" type="submit">
+            เพิ่มอุปกรณ์
           </Button>
         </form>
       </Box>

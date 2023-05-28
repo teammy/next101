@@ -4,6 +4,7 @@ export default async function handler(req, res) {
   if(req.method==='GET') {
     try {
       const result = await safety_conn('equip_item').select(
+        'ei.equip_id',
         'et.equip_type_name',
         'eb.equip_building_name',
         'ef.equip_floor_value',

@@ -37,11 +37,10 @@ import { IconType } from 'react-icons';
 
 const LinkItems = [
   { name: 'หน้าหลัก', icon: FiHome, url:"/add-building"  },
-  { name: 'รายการอุปกรณ์', icon: FiHome, url:"/admin/device_list"  },
   { name: 'เพิ่ม/แก้ไข อุปกรณ์', icon: FiTrendingUp , url:"/admin/device_list" },
   { name: 'เพิ่ม/แก้ไข อาคาร', icon: FiCompass,url:"/admin/building_list" },
   { name: 'เพิ่ม/แก้ไข หน่วยงาน', icon: FiStar, url:"/admin/depart_list" },
-  { name: 'Settings', icon: FiSettings, url:"/admin/add-building" },
+  { name: 'ออกจากระบบ', icon: FiSettings, url:"/admin/add-building" },
 ];
 
 function Sidebar({ children}) {

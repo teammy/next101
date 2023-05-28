@@ -16,9 +16,9 @@ export default async function handler(req, res) {
         equip_building:equip_building,
       });
       console.log(result);
-      res.status(200).json({message: "เพิ่มข้อมูลเรียบร้อยแล้ว"}); 
+      res.status(200).json({success: true, message: "เพิ่มข้อมูลเรียบร้อยแล้ว"});
     } catch (error) {
-      res.status(500).json({message: error.message});
+      res.status(500).json({success: false, message: error.message});
       console.log(error);
     }
   } 
