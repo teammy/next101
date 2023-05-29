@@ -1,15 +1,36 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useRef } from "react";
 import DataTable from "react-data-table-component";
 import { Button, useToast } from "@chakra-ui/react";
+import QRCode from "react-qr-code";
+import ReactToPrint from "react-to-print";
+import React from "react";
 import dayjs from "dayjs";
+import "dayjs/locale/th";
 var buddhistEra = require("dayjs/plugin/buddhistEra");
 dayjs.extend(buddhistEra);
-import "dayjs/locale/th";
 dayjs.locale("th");
 
-const ListDevice = ({ listData,fetchData }) => {
+export class ComponentToPrint extends React.PureComponent {
+  render() {
+    return (
+      <div>My cool content here!</div>
+    );
+  }
+}
+
+// const ComponentToPrint = React.forwardRef((props, ref) => (
+//   <div ref={ref}>
+//     <QRCode value={props.qrData} />
+//     <p>{props.detailData}</p>
+//   </div>
+// ));
+
+
+const ListDevice = ({ listData,fetchData  }) => {
   const [filterText, setFilterText] = useState("");
   const [filteredItems, setFilteredItems] = useState(listData);
+  const componentRef = useRef(); 
+
 
   useEffect(() => {
     setFilteredItems(
@@ -102,6 +123,21 @@ const ListDevice = ({ listData,fetchData }) => {
         <Button colorScheme="red" onClick={() => handleDelete(row.equip_id)}>
           ลบ
         </Button>
+      ),
+    },
+    {
+      button: true,
+      cell: (row) => (
+        <ReactToPrint
+          trigger={() => <button>Print QR</button>}
+          content={() => componentRef.current}
+        >
+        <ComponentToPrint 
+            ref={componentRef} // Pass down the ref
+            qrData={row.qrData} 
+            detailData={row.detailData}
+          />
+        </ReactToPrint>
       ),
     },
   ];
