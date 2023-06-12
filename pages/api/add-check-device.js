@@ -1,4 +1,6 @@
 import { safety_conn } from "../../lib/db";
+import { useRouter } from "next/router";
+
 
 export default async function handler(req, res) {
   if (req.method === "POST") {

@@ -14,12 +14,14 @@ export default async function handler(req, res) {
         'ei.equip_location_install',
         'ei.equip_date_start',
         'ei.equip_date_expire',
+        'ec.*'
       )
       .from('equip_item AS ei')
       .innerJoin('equip_type AS et', 'et.equip_type_id', 'ei.equip_type')
       .innerJoin('equip_building AS eb', 'eb.equip_building_id', 'ei.equip_building')
       .innerJoin('equip_floor AS ef', 'ef.equip_floor_id', 'ei.equip_floor')
       .innerJoin('equip_department AS ed', 'ed.equip_department_id', 'ei.equip_department')
+      .innerJoin('equip_check AS ec', 'ec.equip_check_device_id', 'ei.equip_id')
       .where('ei.equip_id',id)
       res.status(200).json(result);
     } catch (error) {
