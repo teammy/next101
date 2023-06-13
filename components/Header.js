@@ -4,10 +4,9 @@ function Header() {
   const isMobile = useBreakpointValue({ base: true, md: false });
 
   return (
-    <Box bg="#2059E1" py={3} px={4} color="white" borderRadius="0 0 10px 10px">
-      <Flex alignItems="center">
-        <Heading size="lg">ตรวจสอบอุปกรณ์</Heading>
-        <Spacer />
+    <Box bg="#0D2D5E" py={3} px={4} color="white">
+      <Flex alignItems="center"  justifyContent="center">
+        <Heading size="lg" fontWeight={400}>ตรวจสอบความปลอดภัย</Heading>
         {isMobile && (
           <Box>
             {/* Mobile header elements */}

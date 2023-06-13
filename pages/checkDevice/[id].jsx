@@ -11,7 +11,15 @@ import {
   Button,
   FormLabel,
   Input,
+  Heading,
+  Flex,
 } from "@chakra-ui/react";
+import Header from "components/Header";
+import dayjs from "dayjs";
+import "dayjs/locale/th";
+var buddhistEra = require("dayjs/plugin/buddhistEra");
+dayjs.extend(buddhistEra);
+dayjs.locale("th");
 
 function CheckDevicePage() {
   const [device, setDevice] = useState([]);
@@ -19,9 +27,9 @@ function CheckDevicePage() {
   const { id } = router.query;
   const [state, setState] = useState({
     reviewer: "",
-    question1: "",
-    question2: "",
-    question3: "",
+    question1: "normal",
+    question2: "normal",
+    question3: "normal",
     device_id: "",
   });
 
@@ -50,109 +58,216 @@ function CheckDevicePage() {
   const toast = useToast();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch("/api/add-check-device", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(state),
-      });
 
-      if (response.status === 200) {
-        // console.log("Success to add data");
-        toast({
-          title: "บันทึกข้อมูลสำเร็จ",
-          status: "success",
-          duration: 1000,
-          isClosable: true,
-          position: "top",
+    if (!state.reviewer) {
+      toast({
+        title: "กรุณาพิมพ์ชื่อผู้ตรวจสอบ",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+        position: "top",
+      });
+    } else {
+      try {
+        const response = await fetch("/api/add-check-device", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(state),
         });
-        // redirect to another page
-        // redirect(`/viewDevice/${id}`);
-        setTimeout(() => {
-          router.push(`/viewDevice/${id}`);
-        }, 1000);
-      } else {
-        console.log("Failed to add data");
-        // Handle failure
-        toast({
-          title: "บันทึกข้อมูลไม่สำเร็จ",
-          status: "error",
-          duration: 3000,
-          isClosable: true,
-          position: "top",
-        });
+
+        if (response.status === 200) {
+          // console.log("Success to add data");
+          toast({
+            title: "บันทึกข้อมูลสำเร็จ",
+            status: "success",
+            duration: 1000,
+            isClosable: true,
+            position: "top",
+          });
+          // redirect to another page
+          // redirect(`/viewDevice/${id}`);
+          setTimeout(() => {
+            router.push(`/viewDevice/${id}`);
+          }, 1000);
+        } else {
+          console.log("Failed to add data");
+          // Handle failure
+          toast({
+            title: "บันทึกข้อมูลไม่สำเร็จ",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+          });
+        }
+      } catch (error) {
+        console.log(error);
+        // Handle error
       }
-    } catch (error) {
-      console.log(error);
-      // Handle error
     }
   };
 
   return (
     <>
-      <ul>
-        {device.map((item) => (
-          <li key={item.equip_id}>
-            {/* Display the desired data fields */}
-            <p>ชนิดถัง: {item.equip_type_name}</p>
-            <p>บริเวณที่ติดตั้ง: {item.equip_building_name}</p>
-            <p>อาคาร: {item.equip_location_install}</p>
-            {/* Add more fields as needed */}
-          </li>
-        ))}
-      </ul>
-      <Box as="form" onSubmit={handleSubmit}>
-        <VStack spacing={5}>
-          <FormLabel>
-            <Text>มาตรวัดชี้ที่สีเขียว หรือไม่?</Text>
-            <RadioGroup
-              onChange={(value) => handleOptionChange("question1", value)}
-              value={state.question1}
-            >
-              <Radio value="normal">ปกติ</Radio>
-              <Radio value="abnormal">ไม่ปกติ</Radio>
-            </RadioGroup>
-          </FormLabel>
+      <div className="bg-grey">
+        <Header />
+        <Box
+          textAlign="left"
+          w="100%"
+          mt={1}
+          pl={3}
+          color="#002d63"
+          fontWeight={100}
+        >
+          <Heading size="lg" fontWeight={400}>
+            รายละเอียดอุปกรณ์
+          </Heading>
+        </Box>
+        <Flex alignItems="center" justifyContent="center">
+          <Box
+            bg="white"
+            w="95%"
+            p={4}
+            mt={2}
+            mb={2}
+            color="#002d63"
+            className="content-styled"
+          >
+            {device.map((item) => (
+              <div key={item.equip_id}>
+                {/* Display the desired data fields */}
+                <p>ชนิดถัง: {item.equip_type_name}</p>
+                <p>บริเวณที่ติดตั้ง: {item.equip_building_name}</p>
+                <p>อาคาร: {item.equip_location_install}</p>
+                <p>
+                  วันหมดอายุ:{" "}
+                  {dayjs(item.equip_item_date_expire).format("D MMM BBBB")}
+                </p>
+                {/* Add more fields as needed */}
+              </div>
+            ))}
+          </Box>
+        </Flex>
+        <Box
+          textAlign="left"
+          w="100%"
+          mt={1}
+          pl={3}
+          color="#002d63"
+          fontWeight={100}
+        >
+          <Heading size="lg" fontWeight={400}>
+            รายการตรวจสอบ
+          </Heading>
+        </Box>
+        <Flex alignItems="center" justifyContent="center">
+          <Box
+            bg="white"
+            w="95%"
+            p={4}
+            mt={2}
+            mb={2}
+            color="black"
+            className="content-styled"
+            as="form"
+            onSubmit={handleSubmit}
+          >
+            <VStack spacing={2}>
+              <FormLabel>
+                <Text fontSize="xl" color="#002d63">
+                  มาตรวัดชี้ที่สีเขียว หรือไม่?
+                </Text>
+                <RadioGroup
+                  defaultValue='normal'
+                  onChange={(value) => handleOptionChange("question1", value)}
+                  value={state.question1}
+                >
+                  <Radio value="normal" pr={6}>
+                    <Text fontSize="xl" color="#002d63">
+                      ปกติ
+                    </Text>
+                  </Radio>
+                  <Radio value="abnormal">
+                    <Text fontSize="xl" color="#002d63">
+                      ไม่ปกติ
+                    </Text>
+                  </Radio>
+                </RadioGroup>
+              </FormLabel>
 
-          <FormLabel>
-            <Text>มีห่วงและสายรัด หรือไม่?</Text>
-            <RadioGroup
-              onChange={(value) => handleOptionChange("question2", value)}
-              value={state.question2}
-            >
-              <Radio value="normal">ปกติ</Radio>
-              <Radio value="abnormal">ไม่ปกติ</Radio>
-            </RadioGroup>
-          </FormLabel>
+              <FormLabel>
+                <Text fontSize="xl" color="#002d63">
+                  มีห่วงและสายรัด หรือไม่?
+                </Text>
+                <RadioGroup
+                  defaultValue="normal"
+                  onChange={(value) => handleOptionChange("question2", value)}
+                  value={state.question2}
+                >
+                  <Radio value="normal" pr={6}>
+                    <Text fontSize="xl" color="#002d63">
+                      ปกติ
+                    </Text>
+                  </Radio>
+                  <Radio value="abnormal">
+                    <Text fontSize="xl" color="#002d63">
+                      ไม่ปกติ
+                    </Text>
+                  </Radio>
+                </RadioGroup>
+              </FormLabel>
 
-          <FormLabel>
-            <Text>ปลายสายอยู่ในสภาพปกติ หรือไม่?</Text>
-            <RadioGroup
-              onChange={(value) => handleOptionChange("question3", value)}
-              value={state.question3}
-            >
-              <Radio value="normal">ปกติ</Radio>
-              <Radio value="abnormal">ไม่ปกติ</Radio>
-            </RadioGroup>
-          </FormLabel>
+              <FormLabel>
+                <Text fontSize="xl" color="#002d63">
+                  ปลายสายอยู่ในสภาพปกติ หรือไม่?
+                </Text>
+                <RadioGroup
+                  defaultValue="normal"
+                  onChange={(value) => handleOptionChange("question3", value)}
+                  value={state.question3}
+                >
+                  <Radio value="normal" pr={6}>
+                    <Text fontSize="xl" color="#002d63">
+                      ปกติ
+                    </Text>
+                  </Radio>
+                  <Radio value="abnormal">
+                    <Text fontSize="xl" color="#002d63">
+                      ไม่ปกติ
+                    </Text>
+                  </Radio>
+                </RadioGroup>
+              </FormLabel>
 
-          <FormLabel>
-            <Text>ผู้ตรวจสอบ</Text>
-            <Input
-              type="text"
-              placeholder="Enter your name"
-              value={state.reviewer}
-              onChange={handleInputChange}
-            />
-          </FormLabel>
+              <FormLabel isRequired>
+                <Text fontSize="xl" color="#002d63" mb={1}>
+                  ผู้ตรวจสอบ
+                </Text>
+                <Input
+                  type="text"
+                  placeholder="พิมพ์ชื่อผู้ตรวจสอบ"
+                  value={state.reviewer}
+                  onChange={handleInputChange}
+                  mb={2.5}
+                />
+              </FormLabel>
 
-          <Button type="submit" colorScheme="blue">
-            บันทึก
-          </Button>
-        </VStack>
-      </Box>
+              <Button
+                type="submit"
+                width="100%"
+                color="white"
+                fontWeight="500"
+                fontSize="lg"
+                backgroundColor="#0050f0"
+              >
+                บันทึกข้อมูล
+              </Button>
+            </VStack>
+          </Box>
+        </Flex>
+      </div>
     </>
   );
 }

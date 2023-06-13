@@ -18,6 +18,28 @@ const ListDevice = ({ listData,fetchData  }) => {
   const [filteredItems, setFilteredItems] = useState(listData);
   const componentRef = useRef(); 
 
+  const customStylesDatatable = {
+    rows: {
+        style: {
+            minHeight: '72px', // override the row height
+        },
+    },
+    headCells: {
+        style: {
+            paddingLeft: '8px', // override the cell padding for head cells
+            paddingRight: '8px',
+            fontSize: '1.2rem',
+        },
+    },
+    cells: {
+        style: {
+            paddingLeft: '8px', // override the cell padding for data cells
+            paddingRight: '8px',
+            fontSize: '1.1rem',
+        },
+    },
+};
+
 
   useEffect(() => {
     setFilteredItems(
@@ -182,10 +204,10 @@ const ListDevice = ({ listData,fetchData  }) => {
         onChange={handleSearch}
       />
       <DataTable
-        title="Data List"
         columns={columns}
         data={filteredItems}
         pagination
+        customStyles={customStylesDatatable}
       />
     </div>
   );
