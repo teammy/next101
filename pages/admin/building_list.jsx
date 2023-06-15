@@ -8,7 +8,7 @@ function Buildinglist() {
     <>
       <Sidebar>
         <MainContent>
-          <Text fontSize='2xl'>เพิ่ม/แก้ไข อาคารสถานที่</Text>
+          <Text fontSize='2xl' color='#0040b2' mb={2}>เพิ่ม/แก้ไข อาคาร</Text>
           <AddBuildingForm />
         </MainContent>
       </Sidebar>

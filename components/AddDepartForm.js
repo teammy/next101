@@ -100,7 +100,7 @@ const AddDepartForm = () => {
 
   return (
     <>
-     <Box maxWidth="400px" margin="auto">
+     <Box margin="auto" bg='white' borderRadius="xl" p={3} mb={5}>
       <form onSubmit={handleSubmit}>
         <Flex direction="row">
 
@@ -118,23 +118,29 @@ const AddDepartForm = () => {
           </FormControl>
 
           <FormControl flex="1">
-          <Button colorScheme="messenger" type="submit">
-          Submit
-        </Button>
-
+          <Button color="white" type="submit" fontWeight="normal" fontSize="xl" bgGradient='linear(to-r, #f59120 3.89%, #fa5645 103.33%)' 
+          _hover={{
+            bgGradient:'linear(to-r, #f59120 3.89%, #fa5645 103.33%)',
+            color: 'white',
+            fontSize: 'xl',
+          }}
+          >
+            เพิ่มหน่วยงาน
+          </Button>
           </FormControl>
         </Flex>
 
         
       </form>
     </Box>
+    <Box bg='white' borderRadius="xl" p={3}>
       <div>
         <TableContainer>
           <Table variant="simple">
            
             <Thead>
               <Tr>
-                <Th>ชื่อหน่วยงาน</Th>
+                <Th fontSize="xl" color="#0040b2">ชื่อหน่วยงาน</Th>
                 <Th></Th>
               </Tr>
             </Thead>
@@ -147,7 +153,7 @@ const AddDepartForm = () => {
                       colorScheme="red"
                       onClick={() => handleDelete(item.equip_department_id)}
                     >
-                      Delete
+                      ลบ
                     </Button>
                   </Td>
                 </Tr>
@@ -156,6 +162,7 @@ const AddDepartForm = () => {
           </Table>
         </TableContainer>
       </div>
+      </Box>
     </>
   );
 };

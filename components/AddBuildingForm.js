@@ -100,12 +100,12 @@ const AddBuildingForm = () => {
 
   return (
     <>
-     <Box maxWidth="400px" margin="auto">
+     <Box margin="auto" bg='white' borderRadius="xl" p={3} mb={5}>
       <form onSubmit={handleSubmit}>
         <Flex direction="row">
 
 
-          <FormControl flex="1" mr={4}>
+          <FormControl flex="1">
             <Input
           type="text"
           name="equip_building_name"
@@ -118,17 +118,22 @@ const AddBuildingForm = () => {
           </FormControl>
 
           <FormControl flex="1">
-          <Button colorScheme="messenger" type="submit">
-          Submit
-        </Button>
-
+          <Button color="white" type="submit" fontWeight="normal" fontSize="xl" bgGradient='linear(to-r, #f59120 3.89%, #fa5645 103.33%)' 
+          _hover={{
+            bgGradient:'linear(to-r, #f59120 3.89%, #fa5645 103.33%)',
+            color: 'white',
+            fontSize: 'xl',
+          }}
+          >
+            เพิ่มอาคาร
+          </Button>
           </FormControl>
         </Flex>
 
         
       </form>
     </Box>
-      <div>
+      <Box bg='white' borderRadius="xl" p={3}>
         <TableContainer>
           <Table variant="simple">
            
@@ -143,11 +148,12 @@ const AddBuildingForm = () => {
                 <Tr key={item.equip_building_id}>
                   <Td>{item.equip_building_name}</Td>
                   <Td>
+                    
                     <Button
                       colorScheme="red"
                       onClick={() => handleDelete(item.equip_building_id)}
                     >
-                      Delete
+                      ลบ
                     </Button>
                   </Td>
                 </Tr>
@@ -155,7 +161,7 @@ const AddBuildingForm = () => {
             </Tbody>
           </Table>
         </TableContainer>
-      </div>
+      </Box>
     </>
   );
 };

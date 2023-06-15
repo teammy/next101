@@ -14,8 +14,6 @@ import {
   DrawerContent,
   Text,
   useDisclosure,
-  BoxProps,
-  FlexProps,
   Menu,
   MenuButton,
   MenuDivider,
@@ -23,24 +21,20 @@ import {
   MenuList,
 } from '@chakra-ui/react';
 import {
-  FiHome,
-  FiTrendingUp,
-  FiCompass,
-  FiStar,
-  FiSettings,
+  FiLayers,
+  FiFileText,
+  FiLayout,
   FiMenu,
+  FiTool,
   FiBell,
   FiChevronDown,
 } from 'react-icons/fi';
 
-import { IconType } from 'react-icons';
-
 const LinkItems = [
-  { name: 'หน้าหลัก', icon: FiHome, url:"/add-building"  },
-  { name: 'เพิ่ม/แก้ไข อุปกรณ์', icon: FiTrendingUp , url:"/admin/device_list" },
-  { name: 'เพิ่ม/แก้ไข อาคาร', icon: FiCompass,url:"/admin/building_list" },
-  { name: 'เพิ่ม/แก้ไข หน่วยงาน', icon: FiStar, url:"/admin/depart_list" },
-  { name: 'ออกจากระบบ', icon: FiSettings, url:"/admin/add-building" },
+  { name: 'รายงานการตรวจสอบ', icon: FiFileText, url:"/report-device"  },
+  { name: 'เพิ่ม/แก้ไข อุปกรณ์', icon: FiTool , url:"/admin/device_list" },
+  { name: 'เพิ่ม/แก้ไข อาคาร', icon: FiLayout,url:"/admin/building_list" },
+  { name: 'เพิ่ม/แก้ไข หน่วยงาน', icon: FiLayers, url:"/admin/depart_list" },
 ];
 
 function Sidebar({ children}) {
@@ -63,9 +57,8 @@ function Sidebar({ children}) {
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
-      {/* mobilenav */}
-      <MobileNav onOpen={onOpen} />
-      <Box bg={'tomato'} ml={{ base: 0, md: 60 }} p="4">
+
+      <Box ml={{ base: 0, md: 60 }} p="4">
         {children}
       </Box>
     </Box>
@@ -115,15 +108,18 @@ const NavItem = ({ icon, children,url, ...rest }) => {
         borderRadius="lg"
         role="group"
         cursor="pointer"
+        fontSize="xl"
+        color="#0040B2"
         _hover={{
-          bg: 'cyan.400',
+          bg: '#0040B2',
           color: 'white',
+          fontSize: 'xl',
         }}
         {...rest}>
         {icon && (
           <Icon
             mr="4"
-            fontSize="16"
+            fontSize="xl"
             _groupHover={{
               color: 'white',
             }}

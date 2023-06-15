@@ -10,6 +10,9 @@ import {
   Box,
   Button,
   useToast,
+  Center,
+  Text,
+  Square
 } from "@chakra-ui/react";
 import { ThaiDatePicker } from "thaidatepicker-react";
 import dayjs from "dayjs";
@@ -150,7 +153,7 @@ const AddDataForm = (props) => {
 
   return (
     <>
-      <Box margin="auto">
+      <Box margin="auto"  bg='white' borderRadius="xl" p={3}>
         <form onSubmit={handleSubmit} ref={formRef}>
           <Flex direction="row">
             <FormControl flex="1" mr={4}>
@@ -235,10 +238,17 @@ const AddDataForm = (props) => {
               />
             </FormControl>
           </Flex>
-
-          <Button mt={4} colorScheme="messenger" type="submit">
+          <Flex direction="row">
+          <Button mt={4} color="white" type="submit" fontWeight="normal" fontSize="xl" bgGradient='linear(to-r, #f59120 3.89%, #fa5645 103.33%)' 
+          _hover={{
+            bgGradient:'linear(to-r, #f59120 3.89%, #fa5645 103.33%)',
+            color: 'white',
+            fontSize: 'xl',
+          }}
+          >
             เพิ่มอุปกรณ์
           </Button>
+          </Flex>
         </form>
       </Box>
     </>

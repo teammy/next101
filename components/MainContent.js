@@ -14,7 +14,7 @@ import {
 const MainContent = ({children}) => {
   return (
 
-      <Container maxW="full" bg='white' borderRadius="xl">
+      <Container maxW="full">
         {children}
       </Container>
   );

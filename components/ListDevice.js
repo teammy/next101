@@ -1,7 +1,8 @@
 import { useState, useEffect,useRef } from "react";
 import DataTable from "react-data-table-component";
-import { Button, useToast } from "@chakra-ui/react";
+import { Box, Button, useToast,Flex,Input,InputGroup,InputLeftElement } from "@chakra-ui/react";
 import QRCode from "react-qr-code";
+import {FiSearch} from "react-icons/fi";
 import htmlToImage from 'html-to-image';
 import React from "react";
 import dayjs from "dayjs";
@@ -85,7 +86,7 @@ const ListDevice = ({ listData,fetchData  }) => {
         <div ref={qrRef} style={{display: 'none'}}>
         <QRCode value={qrData} size={256} title="aaaaa" />
       </div>
-      <Button colorScheme="green" onClick={downloadQR}>โหลด QRCode</Button>
+      <Button colorScheme="green" onClick={downloadQR} fontSize="lg" fontWeight="normal">โหลด QRCode</Button>
       </div>
     );
   }
@@ -166,7 +167,7 @@ const ListDevice = ({ listData,fetchData  }) => {
     {
       button: true,
       cell: (row) => (
-        <Button colorScheme="red" onClick={() => handleDelete(row.equip_id)}>
+        <Button fontWeight="normal" fontSize="xl" colorScheme="red" onClick={() => handleDelete(row.equip_id)}>
           ลบ
         </Button>
       ),
@@ -197,18 +198,21 @@ const ListDevice = ({ listData,fetchData  }) => {
 
   return (
     <div>
-      <input
-        type="text"
-        placeholder="ค้นหา..."
-        value={filterText}
-        onChange={handleSearch}
-      />
+      <Box mt={4} p={3} bg='white' borderRadius="xl">
+      <InputGroup>
+    <InputLeftElement pointerEvents='none'>
+      <FiSearch color='gray.300' />
+    </InputLeftElement>
+    <Input type='text' placeholder='ค้นหาอุปกรณ์...' w={400} value={filterText}
+        onChange={handleSearch} />
+  </InputGroup>
       <DataTable
         columns={columns}
         data={filteredItems}
         pagination
         customStyles={customStylesDatatable}
       />
+      </Box>
     </div>
   );
 };
