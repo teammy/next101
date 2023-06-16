@@ -3,6 +3,7 @@ import DataTable from "react-data-table-component";
 import { Box, Button, useToast,Flex,Input,InputGroup,InputLeftElement } from "@chakra-ui/react";
 import QRCode from "react-qr-code";
 import {FiSearch,FiTrash2} from "react-icons/fi";
+import {BsThreeDots} from "react-icons/bs";
 import { ImQrcode } from "react-icons/im";
 import htmlToImage from 'html-to-image';
 import React from "react";
@@ -15,7 +16,7 @@ dayjs.locale("th");
 
 
 
-const ListDevice = ({ listData,fetchData  }) => {
+const ListDeviceReport = ({ listData,fetchData  }) => {
   const [filterText, setFilterText] = useState("");
   const [filteredItems, setFilteredItems] = useState(listData);
   const componentRef = useRef(); 
@@ -168,29 +169,12 @@ const ListDevice = ({ listData,fetchData  }) => {
     {
       button: true,
       cell: (row) => (
-        <Button fontWeight="normal" fontSize="xl" colorScheme="red" onClick={() => handleDelete(row.equip_id)}>
-          <FiTrash2 />
+        <Button fontWeight="normal" fontSize="xl" bgColor="#E2E2E4" onClick={() => handleDelete(row.equip_id)}>
+          <BsThreeDots />
         </Button>
       ),
     },
-    {
-      button: true,
-      // cell: (row) => (
-      //   <ReactToPrint
-      //     trigger={() => <button>Print QR</button>}
-      //     content={() => componentRef.current}
-      //   >
-      //   <ComponentToPrint 
-      //       ref={componentRef} // Pass down the ref
-      //       qrData={row.qrData} 
-      //       detailData={row.detailData}
-      //     />
-      //   </ReactToPrint>
-      // ),
-      cell: (row) => (
-        <DownloadQRButton qrData={`https://jsonplaceholder.typicode.com/posts/${row.equip_id}`} detailData={row.equip_id} />
-      ),
-    },
+
   ];
 
   const handleSearch = (e) => {
@@ -198,8 +182,8 @@ const ListDevice = ({ listData,fetchData  }) => {
   };
 
   return (
-    <>
-      <Box mt={4} p={3.5} bg='white' borderRadius="xl" boxShadow="base">
+    <div>
+      <Box mt={4} p={3} bg='white' borderRadius="xl" boxShadow="base">
       <InputGroup>
     <InputLeftElement pointerEvents='none'>
       <FiSearch color='gray.300' />
@@ -214,9 +198,8 @@ const ListDevice = ({ listData,fetchData  }) => {
         customStyles={customStylesDatatable}
       />
       </Box>
-
-    </>
+    </div>
   );
 };
 
-export default ListDevice;
+export default ListDeviceReport;

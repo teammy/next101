@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import {
   Box,
   Icon,
@@ -11,11 +12,11 @@ import {
   List,
   ListItem,
   ListIcon,
+
 } from "@chakra-ui/react";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useEffect,useState } from 'react';
 import Header from "components/Header";
 import dayjs from "dayjs";
 import "dayjs/locale/th";
@@ -23,32 +24,33 @@ var buddhistEra = require("dayjs/plugin/buddhistEra");
 dayjs.extend(buddhistEra);
 dayjs.locale("th");
 
-function ViewDeviceById() {
+function ReportDeviceById() {
   const router = useRouter();
-  const { id } = router.query;
+const { id } = router.query;
 
-  const [device, setDevice] = useState([]);
-  const [checkDevice, setCheckDevice] = useState([]);
+const [device, setDevice] = useState([]);
+const [checkDevice, setCheckDevice] = useState([]);
 
-  useEffect(() => {
-    const getDevice = async () => {
-      const res = await fetch(`/api/device/getDeviceById?id=${id}`);
-      const newDevice = await res.json();
-      setDevice(newDevice);
-    };
-    getDevice();
+useEffect(() => {
+  const getDevice = async () => {
+    const res = await fetch(`/api/device/getDeviceById?id=${id}`);
+    const newDevice = await res.json();
+    setDevice(newDevice);
+  };
+  getDevice();
 
-    const getCheckDevice = async () => {
-      const res = await fetch(`/api/device/getCheckDevice?id=${id}`);
-      const newCheckDevice = await res.json();
-      setCheckDevice(newCheckDevice);
-    };
-    getCheckDevice();
-  }, [id]);
+  const getCheckDevice = async () => {
+    const res = await fetch(`/api/device/getCheckDevice?id=${id}`);
+    const newCheckDevice = await res.json();
+    setCheckDevice(newCheckDevice);
+  };
+  getCheckDevice();
+}, [id]);
 
   return (
+    <>
     <div className="bg-grey">
-      <Header />
+
       <Box textAlign="left" w="100%" mt={1} pl={3} color="#002d63" fontWeight={100}>
       <Heading size="lg" fontWeight={400}>รายละเอียดอุปกรณ์</Heading>
       </Box>
@@ -155,7 +157,10 @@ function ViewDeviceById() {
           </Box>
       </Flex>
     </div>
+  
+
+    </>
   );
 }
 
-export default ViewDeviceById;
+export default ReportDeviceById;

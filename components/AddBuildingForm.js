@@ -14,6 +14,7 @@ import {
   Select,
   Box, FormControl, FormLabel,Flex 
 } from "@chakra-ui/react";
+import {FiPlusCircle,FiTrash2} from "react-icons/fi";
 
 const AddBuildingForm = () => {
   const [listdata, setListData] = useState([]);
@@ -100,7 +101,7 @@ const AddBuildingForm = () => {
 
   return (
     <>
-     <Box margin="auto" bg='white' borderRadius="xl" p={3} mb={5}>
+     <Box margin="auto" bg='white' borderRadius="xl" p={3} mb={5} boxShadow="base">
       <form onSubmit={handleSubmit}>
         <Flex direction="row">
 
@@ -125,6 +126,7 @@ const AddBuildingForm = () => {
             fontSize: 'xl',
           }}
           >
+            <Box as={FiPlusCircle} mr={1.5} />
             เพิ่มอาคาร
           </Button>
           </FormControl>
@@ -133,13 +135,13 @@ const AddBuildingForm = () => {
         
       </form>
     </Box>
-      <Box bg='white' borderRadius="xl" p={3}>
+      <Box bg='white' borderRadius="xl" p={3} boxShadow="base">
         <TableContainer>
           <Table variant="simple">
            
             <Thead>
               <Tr>
-                <Th>ชื่ออาคาร/สถานที่</Th>
+                <Th fontSize="xl" color="#0040b2">ชื่ออาคาร/สถานที่</Th>
                 <Th></Th>
               </Tr>
             </Thead>
@@ -153,7 +155,7 @@ const AddBuildingForm = () => {
                       colorScheme="red"
                       onClick={() => handleDelete(item.equip_building_id)}
                     >
-                      ลบ
+                      <FiTrash2 />
                     </Button>
                   </Td>
                 </Tr>

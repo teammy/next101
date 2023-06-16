@@ -31,7 +31,7 @@ import {
 } from 'react-icons/fi';
 
 const LinkItems = [
-  { name: 'รายงานการตรวจสอบ', icon: FiFileText, url:"/report-device"  },
+  { name: 'รายงานการตรวจสอบ', icon: FiFileText, url:"/admin/report-device"  },
   { name: 'เพิ่ม/แก้ไข อุปกรณ์', icon: FiTool , url:"/admin/device_list" },
   { name: 'เพิ่ม/แก้ไข อาคาร', icon: FiLayout,url:"/admin/building_list" },
   { name: 'เพิ่ม/แก้ไข หน่วยงาน', icon: FiLayers, url:"/admin/depart_list" },

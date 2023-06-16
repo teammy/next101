@@ -14,6 +14,7 @@ import {
   Text,
   Square
 } from "@chakra-ui/react";
+import {FiPlusCircle,FiTrash2} from "react-icons/fi";
 import { ThaiDatePicker } from "thaidatepicker-react";
 import dayjs from "dayjs";
 import "dayjs/locale/th";
@@ -153,7 +154,7 @@ const AddDataForm = (props) => {
 
   return (
     <>
-      <Box margin="auto"  bg='white' borderRadius="xl" p={3}>
+      <Box margin="auto"  bg='white' borderRadius="xl" boxShadow="base" p={3}>
         <form onSubmit={handleSubmit} ref={formRef}>
           <Flex direction="row">
             <FormControl flex="1" mr={4}>
@@ -181,7 +182,7 @@ const AddDataForm = (props) => {
             </FormControl>
             <FormControl flex="1" mr={4}>
               <FormLabel>หน่วยงาน</FormLabel>
-              <Select placeholder="-- เลือกชนิด --" name="equip_department">
+              <Select placeholder="-- เลือกหน่วยงาน --" name="equip_department">
                 {departmentList.map((item) => (
                   <option
                     key={item.equip_department_id}
@@ -246,6 +247,7 @@ const AddDataForm = (props) => {
             fontSize: 'xl',
           }}
           >
+           <Box as={FiPlusCircle} mr={1.5} />
             เพิ่มอุปกรณ์
           </Button>
           </Flex>

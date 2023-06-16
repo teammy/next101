@@ -134,6 +134,7 @@ function CheckDevicePage() {
             mb={2}
             color="#002d63"
             className="content-styled"
+            boxShadow={"base"}
           >
             {device.map((item) => (
               <div key={item.equip_id}>
@@ -165,6 +166,7 @@ function CheckDevicePage() {
         <Flex alignItems="center" justifyContent="center">
           <Box
             bg="white"
+            boxShadow={"base"}
             w="95%"
             p={4}
             mt={2}

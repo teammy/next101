@@ -14,6 +14,7 @@ import {
   Select,
   Box, FormControl, FormLabel,Flex 
 } from "@chakra-ui/react";
+import {FiPlusCircle,FiTrash2} from "react-icons/fi";
 
 const AddDepartForm = () => {
   const [listdata, setListData] = useState([]);
@@ -100,7 +101,7 @@ const AddDepartForm = () => {
 
   return (
     <>
-     <Box margin="auto" bg='white' borderRadius="xl" p={3} mb={5}>
+     <Box margin="auto" bg='white' borderRadius="xl" p={3} mb={5} boxShadow="base">
       <form onSubmit={handleSubmit}>
         <Flex direction="row">
 
@@ -125,6 +126,7 @@ const AddDepartForm = () => {
             fontSize: 'xl',
           }}
           >
+            <Box as={FiPlusCircle} mr={1.5} />
             เพิ่มหน่วยงาน
           </Button>
           </FormControl>
@@ -133,7 +135,7 @@ const AddDepartForm = () => {
         
       </form>
     </Box>
-    <Box bg='white' borderRadius="xl" p={3}>
+    <Box bg='white' borderRadius="xl" p={3} boxShadow="base">
       <div>
         <TableContainer>
           <Table variant="simple">
@@ -153,7 +155,7 @@ const AddDepartForm = () => {
                       colorScheme="red"
                       onClick={() => handleDelete(item.equip_department_id)}
                     >
-                      ลบ
+                      <FiTrash2 />
                     </Button>
                   </Td>
                 </Tr>
