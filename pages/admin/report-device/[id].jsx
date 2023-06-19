@@ -15,11 +15,13 @@ import {
 
 } from "@chakra-ui/react";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
+import Sidebar from 'components/Sidebar';
 import Link from "next/link";
 import { useEffect,useState } from 'react';
 import Header from "components/Header";
 import dayjs from "dayjs";
 import "dayjs/locale/th";
+import MainContent from 'components/MainContent';
 var buddhistEra = require("dayjs/plugin/buddhistEra");
 dayjs.extend(buddhistEra);
 dayjs.locale("th");
@@ -49,6 +51,8 @@ useEffect(() => {
 
   return (
     <>
+    <Sidebar>
+      <MainContent>
     <div className="bg-grey">
 
       <Box textAlign="left" w="100%" mt={1} pl={3} color="#002d63" fontWeight={100}>
@@ -157,7 +161,8 @@ useEffect(() => {
           </Box>
       </Flex>
     </div>
-  
+    </MainContent>
+    </Sidebar>
 
     </>
   );

@@ -31,6 +31,7 @@ const ListDevice = ({ listData,fetchData  }) => {
             paddingLeft: '8px', // override the cell padding for head cells
             paddingRight: '8px',
             fontSize: '1.2rem',
+            color: '#A9ADB1',
         },
     },
     cells: {
@@ -38,6 +39,7 @@ const ListDevice = ({ listData,fetchData  }) => {
             paddingLeft: '8px', // override the cell padding for data cells
             paddingRight: '8px',
             fontSize: '1.1rem',
+           
         },
     },
 };

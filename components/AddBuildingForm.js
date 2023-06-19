@@ -12,6 +12,7 @@ import {
   Button,
   Input,
   Select,
+  useToast,
   Box, FormControl, FormLabel,Flex 
 } from "@chakra-ui/react";
 import {FiPlusCircle,FiTrash2} from "react-icons/fi";
@@ -35,8 +36,22 @@ const AddBuildingForm = () => {
     }));
   };
 
+
+  const toast = useToast()
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!data.equip_building_name) {
+
+      toast({
+        description: "กรุณาพิมพ์ชื่ออาคาร",
+        status: "error",
+        duration: 1200,
+        isClosable: true,
+        position: "top"
+      });
+      return;
+    }
 
     const formData = {
       equip_building_name: data.equip_building_name,

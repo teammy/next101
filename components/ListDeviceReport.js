@@ -1,4 +1,6 @@
 import { useState, useEffect,useRef } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import DataTable from "react-data-table-component";
 import { Box, Button, useToast,Flex,Input,InputGroup,InputLeftElement } from "@chakra-ui/react";
 import QRCode from "react-qr-code";
@@ -17,6 +19,7 @@ dayjs.locale("th");
 
 
 const ListDeviceReport = ({ listData,fetchData  }) => {
+  const router = useRouter();
   const [filterText, setFilterText] = useState("");
   const [filteredItems, setFilteredItems] = useState(listData);
   const componentRef = useRef(); 
@@ -32,6 +35,7 @@ const ListDeviceReport = ({ listData,fetchData  }) => {
             paddingLeft: '8px', // override the cell padding for head cells
             paddingRight: '8px',
             fontSize: '1.2rem',
+            color: '#A9ADB1',
         },
     },
     cells: {
@@ -95,38 +99,10 @@ const ListDeviceReport = ({ listData,fetchData  }) => {
 
   // Delete item function
   const toast = useToast();
-  const handleDelete = async (itemid) => {
-    try {
-      const response = await fetch("/api/device/delete-device", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify( itemid ),
-      });
-      const responseData = await response.json();
-      if (response.ok) {
-        toast({
-          title: "ลบข้อมูลสำเร็จ",
-          description: responseData.message,
-          status: "success",
-          duration: 3000,
-          isClosable: true,
-          position: "top",
-        });
-        fetchData();; // Refresh the data after successful deletion
-      } else {
-        throw new Error(responseData.message);
-      }
-    } catch (error) {
-      toast({
-        title: "Data Deletion",
-        description: error.message || "Something went wrong",
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-      });
-    }
+  const [device, setDevice] = useState([]);
+  const [checkDevice, setCheckDevice] = useState([]);
+  const handleReport = async (itemid) => {
+    router.push(`/admin/report-device/${itemid}`);
   };
 
   // Column setup for data table
@@ -169,7 +145,7 @@ const ListDeviceReport = ({ listData,fetchData  }) => {
     {
       button: true,
       cell: (row) => (
-        <Button fontWeight="normal" fontSize="xl" bgColor="#E2E2E4" onClick={() => handleDelete(row.equip_id)}>
+        <Button fontWeight="normal" fontSize="xl" bgColor="#E2E2E4" onClick={() => handleReport(row.equip_id)}>
           <BsThreeDots />
         </Button>
       ),

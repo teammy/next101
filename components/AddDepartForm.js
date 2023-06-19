@@ -12,6 +12,7 @@ import {
   Button,
   Input,
   Select,
+  useToast,
   Box, FormControl, FormLabel,Flex 
 } from "@chakra-ui/react";
 import {FiPlusCircle,FiTrash2} from "react-icons/fi";
@@ -34,9 +35,20 @@ const AddDepartForm = () => {
       [name]: value,
     }));
   };
-
+  const toast = useToast();
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if(!data.equip_department_name) {
+      toast({
+        description: "กรุณาพิมพ์ชื่อหน่วยงาน",
+        status: "error",
+        duration: 1200,
+        isClosable: true,
+        position: "top"
+      });
+      return;
+    }
 
     const formData = {
       equip_department_name: data.equip_department_name,
