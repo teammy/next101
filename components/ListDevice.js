@@ -190,7 +190,7 @@ const ListDevice = ({ listData,fetchData  }) => {
       //   </ReactToPrint>
       // ),
       cell: (row) => (
-        <DownloadQRButton qrData={`${process.env.PUBLIC_URL}${row.equip_id}`} detailData={row.equip_id} />
+        <DownloadQRButton qrData={`https://safety.teammy.online/viewDevice/${row.equip_id}`} detailData={row.equip_id} />
       ),
     },
   ];
