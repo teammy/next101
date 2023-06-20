@@ -29,6 +29,7 @@ import {
   FiBell,
   FiChevronDown,
 } from 'react-icons/fi';
+import Image from 'next/image';
 
 const LinkItems = [
   { name: 'รายงานการตรวจสอบ', icon: FiFileText, url:"/admin/report-device"  },
@@ -80,9 +81,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
       h="full"
       {...rest}>
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="xl" fontFamily="monospace" fontWeight="bold">
-          Safety Check
-        </Text>
+        <Image src="/logo.png" alt="logo" width={363} height={76} />
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (

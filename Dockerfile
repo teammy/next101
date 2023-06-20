@@ -23,10 +23,12 @@ RUN npm run build
 
 ENV NODE_ENV production
 # Set the environment variables
-ENV PORT=3001
+ENV PORT=3000
 
 # Expose the specified port
 EXPOSE ${PORT}
 
 # Start the Next.js app
 CMD ["npm", "start"]
+
+docker run --name safety -d cloudflare/cloudflared:latest tunnel --no-autoupdate run --token eyJhIjoiZTEyMzkxOTJjMzYzYTU0ZjM4OGRhZWM2MzA1NTdiZWYiLCJ0IjoiNGE4ZWRiNzgtNGIwMi00NzA0LWFmMWYtMGIzMDI4ODhhYTc4IiwicyI6Ik1UYzJaVEJtWlRJdE5EWm1NUzAwWXpjNExXRmpabUl0WmpZeE5UQTFNVFl6TnpaaiJ9

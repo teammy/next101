@@ -101,25 +101,6 @@ const AddDataForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if(
-      !data.equip_type ||
-      !data.equip_department ||
-      !data.equip_floor ||
-      !data.equip_location ||
-      !startDate ||
-      !expireDate ||
-      !data.equip_building
-    ){
-      toast({
-        description: "กรุณาพิมพ์ข้อมูลให้ครบ",
-        status: "error",
-        duration: 1200,
-        isClosable: true,
-        position: "top"
-      });
-      return;
-    }
-
     const formData = {
       equip_type: e.target.elements.equip_type.value,
       equip_department: e.target.elements.equip_department.value,
@@ -129,6 +110,20 @@ const AddDataForm = (props) => {
       equip_date_expire: expireDate,
       equip_building: e.target.elements.equip_building.value,
     };
+
+    for (const [key, value] of Object.entries(formData)) {
+      if (!value) {
+        toast({
+          title: "กรุณากรอกข้อมูลให้ครบถ้วน",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+          position: "top",
+        });
+        return;
+      }
+    }
+
 
     fetch("/api/device/add-device", {
       method: "POST",

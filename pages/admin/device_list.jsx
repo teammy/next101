@@ -4,6 +4,7 @@ import ListDevice from "../../components/ListDevice";
 import Sidebar from "components/Sidebar";
 import MainContent from "components/MainContent";
 import { Heading,Text } from '@chakra-ui/react'
+import Head from "next/head";
 
 function DeviceList() {
   const [listData, setListData] = useState([]);
@@ -24,6 +25,9 @@ function DeviceList() {
 
   return (
     <>
+     <Head>
+      <title>เพิ่ม/แก้ไข อุปกรณ์</title>
+    </Head>
       <Sidebar>
         <MainContent>
           <Text fontSize='2xl' color='#0040b2' mb={2}>เพิ่ม/แก้ไข อุปกรณ์</Text>
