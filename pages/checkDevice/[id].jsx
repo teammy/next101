@@ -140,12 +140,10 @@ function CheckDevicePage() {
               <div key={item.equip_id}>
                 {/* Display the desired data fields */}
                 <p>ชนิดถัง: {item.equip_type_name}</p>
-                <p>บริเวณที่ติดตั้ง: {item.equip_building_name}</p>
-                <p>อาคาร: {item.equip_location_install}</p>
-                <p>
-                  วันหมดอายุ:{" "}
-                  {dayjs(item.equip_item_date_expire).format("D MMM BBBB")}
-                </p>
+              <p>อาคาร: {item.equip_building_name} {item.equip_floor_value}</p>
+              <p>บริเวรณติดตั้ง: {item.equip_location_install}</p>
+              <p>วันบรรจุก๊าซ: {dayjs(item.equip_date_start).format("D MMM BBBB")}</p>
+              <p>วันหมดอายุ: {dayjs(item.equip_date_expire).format("D MMM BBBB")}</p>
                 {/* Add more fields as needed */}
               </div>
             ))}
